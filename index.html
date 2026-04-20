@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDR EV | Premium Charging Network</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet JS for High-End Real Map Background -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <!-- High-end Realistic Animated Map Background -->
+    <div id="real-map-bg"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0;"></div>
+    <div class="map-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; background: radial-gradient(circle at top right, rgba(57,255,20,0.18), transparent 38%), linear-gradient(135deg, rgba(1,8,6,0.45), rgba(0,0,0,0.55));">
+    </div>
+
+    <div class="map-credit" aria-hidden="true">Map data &copy; OpenStreetMap contributors, imagery &copy; CARTO</div>
+
+    <header>
+        <div class="container header-container">
+            <a href="#home" class="logo">
+                <img src="assets/logo.jpg"
+                    alt="INDR EV" class="logo-img">
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#host">Host</a>
+                <a href="#franchise">Franchise</a>
+                <a href="#faq">FAQs</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="app-content">
+        <!-- Injected via app.js -->
+    </main>
+
+    <footer class="dark-bg section" style="padding-bottom: 20px;">
+        <div class="container grid-3">
+            <div>
+                <img src="assets/logo.jpg"
+                    style="height:40px; filter: invert(1); margin-bottom: 20px;">
+                <p>Powering Every Journey Forward.<br>Build a reliable, accessible ecosystem.</p>
+                <p class="mt-4 text-muted" style="font-size:0.8rem;">&copy; 2024 GREENEX INDR EV INDIA PRIVATE LIMITED.<br>
+                    GSTIN: 09AAMCG2764L1Z0<br>
+                    All rights reserved.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <br>
+                <a href="#home" class="text-white" style="display:block; margin-bottom:10px;">Home</a>
+                <a href="#solutions" class="text-white" style="display:block; margin-bottom:10px;">Solutions</a>
+                <a href="#host" class="text-white" style="display:block; margin-bottom:10px;">Host a Charger</a>
+                <a href="#franchise" class="text-white" style="display:block;">Franchise</a>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <br>
+                <p><i class="fas fa-phone text-white"></i> +91 8826803334, +91 7457022485</p>
+                <p><i class="fas fa-envelope text-white"></i> info@indrev.in</p>
+                <p><i class="fas fa-map-marker-alt text-white"></i> Delhi, 110074</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot-button" class="chatbot-btn"><i class="fas fa-bolt"></i></div>
+    <div id="chatbot-window" class="chatbot-window hidden">
+        <div class="chatbot-header">
+            <div>INDR EV Assistant</div>
+            <button id="chatbot-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+            <div class="message bot">Hello! I am the INDR EV Assistant. Select a question below to learn more about us:
+            </div>
+        </div>
+        <div id="chatbot-options"
+            style="display: flex; flex-direction: column; gap: 8px; padding: 15px; border-top: 1px solid rgba(57, 255, 20, 0.2); background: rgba(0, 0, 0, 0.4); max-height:220px; overflow-y:auto;">
+            <button class="chat-faq-btn" data-faq="land">Do you provide land for the franchise? (USP)</button>
+            <button class="chat-faq-btn" data-faq="chargers">What types of EV Chargers do you offer?</button>
+            <button class="chat-faq-btn" data-faq="host">Who can host a charging station?</button>
+            <button class="chat-faq-btn" data-faq="cost">What is the Franchise Investment cost?</button>
+            <button class="chat-faq-btn" data-faq="roi">What is the ROI / Revenue model?</button>
+            <button class="chat-faq-btn" data-faq="certifications">Are the chargers certified and safe?</button>
+            <button class="chat-faq-btn" data-faq="subsidies">Are there government subsidies available?</button>
+            <button class="chat-faq-btn" data-faq="warranty">What warranties and support are included?</button>
+        </div>
+    </div>
+
+    <!-- Templates -->
+    <template id="tmpl-home">
+        <section class="hero">
+            <img src="assets/hero.png"
+                class="hero-image">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge mb-3">Next Gen Charging</span>
+                    <h1>Powering Every Journey Forward.</h1>
+                    <p>Building India's most trusted EV infrastructure network. Access smart, efficient, and
+                        strategically located charging stations.</p>
+                    <div class="hero-buttons">
+                        <a href="#solutions" class="btn btn-primary">Find Chargers</a>
+                        <a href="#franchise" class="btn btn-secondary">Partner With Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-sec">
+            <div class="container">
+                <div class="grid-4 text-center"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <i class="fas fa-coins" style="font-size:2rem; color:#39ff14; margin-bottom:15px;"></i>
+                        <h2 style="font-size:2.5rem; color:#fff;">₹1.5L+ /mo</h2>
+                        <h4 style="color:var(--neon-green);">Passive Income</h4>
+                        <p class="text-muted mt-2" style="font-size:0.85rem;">Highly profitable franchise ROI model.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-bullseye" style="font-size:2rem; color:#39ff14; margin-bottom:15px;"></i>
+                        <h2 style="font-size:2.5rem; color:#fff;">99.93%</h2>
+                        <h4 style="color:var(--neon-green);">ARAI Rating</h4>
+                        <p class="text-muted mt-2" style="font-size:0.85rem;">Highest certified industry accuracy.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-file-invoice-dollar"
+                            style="font-size:2rem; color:#39ff14; margin-bottom:15px;"></i>
+                        <h2 style="font-size:2.5rem; color:#fff;">70%</h2>
+                        <h4 style="color:var(--neon-green);">FAME II Subsidy</h4>
+                        <p class="text-muted mt-2" style="font-size:0.85rem;">Full government support for setup.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-bolt" style="font-size:2rem; color:#39ff14; margin-bottom:15px;"></i>
+                        <h2 style="font-size:2.5rem; color:#fff;">240kW</h2>
+                        <h4 style="color:var(--neon-green);">Max Output</h4>
+                        <p class="text-muted mt-2" style="font-size:0.85rem;">Ultra-fast dual charging hardware.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="grid-2">
+                <div>
+                    <span class="badge mb-3">Our Core</span>
+                    <h2 class="section-title" style="text-align:left; margin-bottom: 20px;">Intelligent & Certified
+                        Infrastructure.</h2>
+                    <p class="text-muted mb-4" style="font-size:1.1rem;">We deploy a highly scalable framework
+                        encompassing AC Chargers up to 22 kW and robust DC Ultra-Fast Chargers operating up to 240 kW.
+                        All backed by international safety and accuracy protocols.</p>
+                    <ul style="list-style:none; line-height:2.5;">
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> ARAI & BIS
+                            Certified Hardware</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> IP54
+                            Protection & Surge Safeguards</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> Intelligent
+                            load balancing systems</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="assets/charger-close.png"
+                        class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-sec text-center">
+            <div class="container">
+                <span class="badge mb-3">Target Audiences</span>
+                <h2 class="section-title">Solutions For Everyone</h2>
+                <div class="mt-5 text-left"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <i class="fas fa-user icon-large"></i>
+                        <h3>For EV Users</h3>
+                        <p class="text-muted mt-3 mb-4">Fast and accessible charging points mapping your daily routes
+                            and intercity corridors.</p>
+                        <a href="#solutions" style="color:#39ff14; font-weight:700;">Explore <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-truck icon-large"></i>
+                        <h3>For Fleets</h3>
+                        <p class="text-muted mt-3 mb-4">Dedicated commercial hubs designed strictly to maximize fleet
+                            ROI and trim downtime.</p>
+                        <a href="#solutions" style="color:#39ff14; font-weight:700;">Explore <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-building icon-large"></i>
+                        <h3>For Businesses</h3>
+                        <p class="text-muted mt-3 mb-4">Transform your commercial space into a revenue generating
+                            destination with ZERO hassle.</p>
+                        <a href="#host" style="color:#39ff14; font-weight:700;">Explore <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="card"
+                        style="border: 1px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.6));">
+                        <span class="badge mb-2"
+                            style="background:#39ff14; color:#000; font-size:0.7rem; float:right;">Our USP</span>
+                        <i class="fas fa-map-signs icon-large" style="color:var(--neon-green);"></i>
+                        <h3>For Investors</h3>
+                        <p class="text-muted mt-3 mb-4">We provide prime highway land & charging facility. 100% Turnkey
+                            investment.</p>
+                        <a href="#franchise" style="color:#39ff14; font-weight:700;">Explore <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eco Savings Calculator -->
+        <section class="section container">
+            <div class="card mb-5"
+                style="max-width:1000px; margin: 0 auto; padding: 40px; border-top: 4px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.8)); position:relative; overflow:hidden;">
+                <!-- Decorative background elements -->
+                <i class="fas fa-leaf"
+                    style="position:absolute; right:-20px; bottom:-20px; font-size:15rem; color:rgba(57,255,20,0.03); pointer-events:none;"></i>
+
+                <div class="text-center mb-5">
+                    <span class="badge mb-3"><i class="fas fa-leaf" style="color:#39ff14; margin-right:5px;"></i> Go
+                        Green & Save</span>
+                    <h2 class="section-title">EV Savings & Eco Calculator</h2>
+                    <p class="text-muted" style="max-width:700px; margin:0 auto;">See how much you can save every year
+                        by switching to an EV, while also tracking your positive impact on the environment.</p>
+                </div>
+
+                <div class="grid-2" style="align-items:center; gap:40px;">
+                    <!-- Controls -->
+                    <div style="z-index: 1;">
+                        <div class="mb-4">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <span style="font-weight:600; color:#fff;">Daily Distance Driven</span>
+                                <span id="eco-dist-val" style="color:var(--neon-green); font-weight:700;">50 km</span>
+                            </div>
+                            <input type="range" id="eco-dist" min="10" max="250" step="5" value="50"
+                                class="custom-slider w-100">
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-top:5px;">
+                                <span>10 km</span><span>250 km</span></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <span style="font-weight:600; color:#fff;">Petrol Mileage</span>
+                                <span id="eco-mileage-val" style="color:#fff; font-weight:700;">15 km/l</span>
+                            </div>
+                            <input type="range" id="eco-mileage" min="5" max="30" step="1" value="15"
+                                class="custom-slider w-100">
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-top:5px;">
+                                <span>5 km/l</span><span>30 km/l</span></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <span style="font-weight:600; color:#fff;">Petrol Cost</span>
+                                <span id="eco-petrol-val" style="color:#ff4d4d; font-weight:700;">₹100</span>
+                            </div>
+                            <input type="range" id="eco-petrol" min="80" max="150" step="1" value="100"
+                                class="custom-slider w-100">
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-top:5px;">
+                                <span>₹80</span><span>₹150</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div style="z-index: 1;">
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-bottom:20px;">
+                            <div
+                                style="background:rgba(255, 77, 77, 0.05); border:1px solid rgba(255, 77, 77, 0.3); padding:20px; border-radius:12px; text-align:center;">
+                                <p class="text-muted mb-1" style="font-size:0.85rem;">Monthly Petrol Cost</p>
+                                <h3 id="eco-ice-cost" style="color:#ff4d4d;">₹10,000</h3>
+                            </div>
+                            <div
+                                style="background:rgba(57, 255, 20, 0.05); border:1px solid rgba(57, 255, 20, 0.3); padding:20px; border-radius:12px; text-align:center;">
+                                <p class="text-muted mb-1" style="font-size:0.85rem;">Monthly EV Cost</p>
+                                <h3 id="eco-ev-cost" style="color:var(--neon-green);">₹2,000</h3>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); padding:25px; border-radius:12px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                            <h4 class="mb-2" style="font-weight:400; color:#fff;">Your Total Annual Savings</h4>
+                            <h1 id="eco-annual-savings"
+                                style="color:var(--neon-green); font-size:3rem; margin-bottom:15px; text-shadow: 0 0 10px rgba(57,255,20,0.3);">
+                                ₹96,000</h1>
+                            <div
+                                style="display:flex; justify-content:center; align-items:center; gap:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+                                <i class="fas fa-tree" style="color:#39ff14; font-size:1.5rem;"></i>
+                                <div style="text-align:left;">
+                                    <h4 id="eco-co2" style="color:#fff; margin:0;">2.8 Tons</h4>
+                                    <p class="text-muted" style="font-size:0.8rem; margin:0;">CO₂ Emissions Saved per
+                                        year</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="grid-2">
+                <div>
+                    <img src="assets/about-network.jpg"
+                        class="img-fluid">
+                </div>
+                <div style="padding-left:40px;">
+                    <h2 class="section-title" style="text-align:left; margin-bottom:20px;">Active Stations</h2>
+                    <div class="card mb-3" style="padding: 20px;">
+                        <h4>Village Dhikuli, Ramnagar</h4>
+                        <p class="text-muted">60kW Dual Gun DC Fast Charging Station</p>
+                    </div>
+                    <div class="card mb-3" style="padding: 20px;">
+                        <h4>EVARA SPA & RESORT, Ramnagar</h4>
+                        <p class="text-muted">22kW AC Fast Charging Station</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tmpl-about">
+        <section class="section container text-center">
+            <span class="badge mb-3">About Us</span>
+            <h1 class="page-title">INDR EV</h1>
+            <p class="text-muted" style="max-width:800px; margin: 0 auto; font-size:1.2rem;">
+                INDR EV is a next-generation electric mobility infrastructure company focused on building a reliable,
+                scalable, and accessible EV charging ecosystem across India. Our mission is simple — eliminate range
+                anxiety and accelerate EV adoption.
+            </p>
+
+            <div class="grid-2 mt-5 text-left">
+                <div class="card">
+                    <i class="fas fa-network-wired icon-large"></i>
+                    <h2>Smart Network</h2>
+                    <p class="text-muted mt-3">We are developing a smart network of fast-charging stations strategically
+                        placed across highways, cities, and high-demand zones, ensuring that EV users always have a
+                        charging point within reach. By combining high-capacity chargers (120kW+), intelligent
+                        placement, and real-time accessibility, INDR EV is redefining how India powers its electric
+                        future.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-handshake icon-large"></i>
+                    <h2>Franchise-Driven</h2>
+                    <p class="text-muted mt-3">At the core of our model is a franchise-driven expansion strategy,
+                        enabling entrepreneurs and businesses to participate in the EV revolution while generating
+                        sustainable income. We provide end-to-end support — from setup and infrastructure to operations
+                        and branding.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title mt-5 pt-5">More Than Charging</h2>
+            <p class="text-muted text-center"
+                style="max-width:800px; margin: 0 auto; font-size:1.2rem; margin-bottom:50px;">INDR EV is not just about
+                charging vehicles — it’s about building confidence in electric mobility, creating infrastructure that
+                supports growth, and contributing to a cleaner, more sustainable India.</p>
+
+            <span class="badge mb-3 mt-5">Core Team</span>
+            <h2 class="section-title">Leadership</h2>
+
+            <div class="grid-2 mt-5 text-left" style="align-items: flex-start;">
+                <div class="card" style="display:flex; flex-direction:column; gap:20px;">
+                    <img src="assets/rounak.png"
+                        style="width:100%; height:auto; max-height: 500px; object-fit: contain; border-radius:12px; border:2px solid rgba(57,255,20,0.3); background: rgba(0,0,0,0.3);">
+                    <div>
+                        <h3 class="mb-2" style="color:var(--neon-green);">Rounak Kapoor</h3>
+                        <span class="badge mb-3"
+                            style="background:rgba(57, 255, 20, 0.2); color:#39ff14;">Co-Founder</span>
+                        <p class="text-muted" style="font-size:0.95rem; line-height:1.8;">
+                            Rounak Kapoor is the Co-Founder of GRENEEX INDR EV INDIA PVT LTD, leading business growth
+                            and strategic expansion. He is known for building strong partnerships and scaling ventures
+                            with a clear market-focused approach. With hands-on experience in business development and
+                            marketing, he brings a practical, execution-driven mindset.
+                            <br><br>At INDR EV, he drives network expansion, strategic alliances, and revenue-focused
+                            growth initiatives. His focus is on creating a scalable and sustainable EV charging
+                            ecosystem across India. He combines sharp strategic vision with on-ground execution to build
+                            long-term business value.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="display:flex; flex-direction:column; gap:20px;">
+                    <img src="assets/ishan.jpg"
+                        style="width:100%; height:auto; max-height: 500px; object-fit: contain; border-radius:12px; border:2px solid rgba(57,255,20,0.3); background: rgba(0,0,0,0.3);">
+                    <div>
+                        <h3 class="mb-2" style="color:var(--neon-green);">Ishan Garg</h3>
+                        <span class="badge mb-3"
+                            style="background:rgba(57, 255, 20, 0.2); color:#39ff14;">Co-Founder</span>
+                        <p class="text-muted" style="font-size:0.95rem; line-height:1.8;">
+                            Ishan Garg is the Co-Founder of GRENEEX INDR EV INDIA PVT LTD, leading strategy and
+                            marketing. He is known for identifying market gaps and turning them into scalable
+                            opportunities. With a strong foundation in finance and marketing, he brings a data-driven
+                            approach to growth.
+                            <br><br>At INDR EV, he drives brand positioning and go-to-market strategy. His focus is on
+                            building a high-impact, future-ready EV infrastructure business. He combines strategic
+                            thinking with execution to create long-term value.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </template>
+
+    <template id="tmpl-solutions">
+        <section class="section container text-center">
+            <span class="badge mb-3">Product Range</span>
+            <h1 class="page-title">Advanced Charging Solutions</h1>
+            <p class="text-muted mb-5">High-quality infrastructure configured to fit absolute EV charging requirements.
+            </p>
+
+            <div class="grid-2 text-left mb-5">
+                <div class="card">
+                    <h3 class="mb-3" style="color:var(--neon-green);"><i class="fas fa-bolt"></i> AC CHARGERS</h3>
+                    <ul class="text-muted" style="list-style:none; line-height:2;">
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 7.4 kW</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 11 kW</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 22 kW</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="mb-3" style="color:var(--neon-green);"><i class="fas fa-charging-station"></i> DC
+                        CHARGERS</h3>
+                    <p class="text-muted mb-3">With dynamic load balancing.</p>
+                    <ul class="text-muted" style="list-style:none; line-height:2;">
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 30 kW Single &
+                            Dual Gun</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 60 kW Dual Gun
+                        </li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 120 kW Dual
+                            Gun</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 180 kW Dual
+                            Gun</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> 240 kW Dual
+                            Gun</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Featured Showcase Image -->
+            <div class="grid-2 text-left mb-5 mt-5" style="align-items: center;">
+                <div class="card"
+                    style="padding:0; overflow:hidden; border: 2px solid rgba(57,255,20,0.3); background: transparent;">
+                    <img src="assets/wall-charger.jpg"
+                        alt="INDR EV Wall Mounted Charger"
+                        style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
+                <div>
+                    <span class="badge mb-3">Deployment Ready</span>
+                    <h2 class="section-title" style="text-align:left; margin-bottom:20px; font-size:2.2rem;">Sleek,
+                        Space-Saving Design</h2>
+                    <p class="text-muted mb-4" style="font-size:1.1rem;">
+                        Our wall-mounted charging units are engineered to integrate seamlessly into any environment
+                        without occupying valuable ground space. The vibrant INDR EV design ensures maximum station
+                        visibility while maintaining a highly compact, professional footprint.
+                    </p>
+                    <ul class="text-muted" style="list-style:none; line-height:2.5;">
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> Easy
+                            Wall-Mount Installation</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> Distinctive
+                            High-Visibility Branding</li>
+                        <li><i class="fas fa-check-circle" style="color:#39ff14; margin-right:10px;"></i> Robust
+                            Weather-Resistant Construction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hardware Specs & Certifications -->
+            <div class="mb-5 text-left">
+                <div class="text-center mb-5 mt-5">
+                    <span class="badge mb-3">Hardware Excellence</span>
+                    <h2 class="section-title">ARAI Certified Quality</h2>
+                    <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Highest accuracy
+                        rating (0.9993) with international safety standards, IP54 rated enclosure, surge protection, and
+                        advanced temperature monitoring.</p>
+                </div>
+
+                <div class="mb-5 text-center"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="card" style="padding:20px;">
+                        <i class="fas fa-bolt" style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h2 style="color:#fff;">60kW</h2>
+                        <p class="text-muted" style="font-size:0.85rem;">Max Power Output</p>
+                    </div>
+                    <div class="card" style="padding:20px;">
+                        <i class="fas fa-bullseye"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h2 style="color:#fff;">99.93%</h2>
+                        <p class="text-muted" style="font-size:0.85rem;">ARAI Accuracy Rating</p>
+                    </div>
+                    <div class="card" style="padding:20px;">
+                        <i class="fas fa-shield-alt"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h2 style="color:#fff;">IP54</h2>
+                        <p class="text-muted" style="font-size:0.85rem;">Protection Rating</p>
+                    </div>
+                    <div class="card" style="padding:20px;">
+                        <i class="fas fa-satellite-dish"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h2 style="color:#fff;">24/7</h2>
+                        <p class="text-muted" style="font-size:0.85rem;">Remote Monitoring</p>
+                    </div>
+                </div>
+
+                <div class="card text-center" style="border:1px solid rgba(57,255,20,0.3); background:rgba(0,0,0,0.4);">
+                    <h3 class="mb-4" style="color:var(--neon-green);">Certified & Compliant</h3>
+                    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">ARAI
+                            Certified</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">BIS
+                            Approved</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">CEA
+                            Compliant</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">FAME
+                            II Eligible</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">ISO
+                            9001</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">CE
+                            Marked</span>
+                        <span class="badge"
+                            style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid rgba(255,255,255,0.2);">iCAT
+                            Certified</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tmpl-host">
+        <!-- Host the Charger Section -->
+        <section class="section bg-sec">
+            <div class="container text-center mb-5">
+                <span class="badge mb-3">Partner with INDR EV</span>
+                <h1 class="page-title">Host the Charger</h1>
+                <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.2rem;">Own a property? Turn it
+                    into a high-income, future-ready asset with INDR EV. We invite property owners, landowners, and
+                    commercial space holders to host EV charging stations and become a part of India’s rapidly growing
+                    electric mobility ecosystem.</p>
+            </div>
+            <div class="container grid-3 mb-5 text-left">
+                <div class="card">
+                    <h3 class="mb-3">Why Host?</h3>
+                    <p class="text-muted mb-2"><strong>Earn Passive Income:</strong> Generate consistent revenue through
+                        charging usage.</p>
+                    <p class="text-muted mb-2"><strong>Increase Footfall:</strong> Attract EV users to your location —
+                        ideal for malls, cafes, & highways.</p>
+                    <p class="text-muted mb-2"><strong>Future-Proof Your Property:</strong> Position your space as a
+                        modern, EV-ready destination.</p>
+                    <p class="text-muted"><strong>End-to-End Support:</strong> We handle setup, technology, branding,
+                        and ops.</p>
+                </div>
+                <div class="card">
+                    <h3 class="mb-3">Who Can Host?</h3>
+                    <ul class="text-muted" style="list-style:none;">
+                        <li class="mb-2"><i class="fas fa-check" style="color:#39ff14; margin-right:8px;"></i>
+                            Commercial property owners</li>
+                        <li class="mb-2"><i class="fas fa-check" style="color:#39ff14; margin-right:8px;"></i> Hotel &
+                            restaurant owners</li>
+                        <li class="mb-2"><i class="fas fa-check" style="color:#39ff14; margin-right:8px;"></i> Highway &
+                            roadside landowners</li>
+                        <li class="mb-2"><i class="fas fa-check" style="color:#39ff14; margin-right:8px;"></i> Mall &
+                            retail space operators</li>
+                        <li class="mb-2"><i class="fas fa-check" style="color:#39ff14; margin-right:8px;"></i> Office
+                            complexes & parking spaces</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="mb-3">How It Works</h3>
+                    <ol class="text-muted" style="padding-left:15px; margin-bottom:15px;">
+                        <li class="mb-2">Contact our team</li>
+                        <li class="mb-2">Location Assessment by INDR EV Team</li>
+                        <li class="mb-2">Setup & Installation (Fast Chargers + Infrastructure)</li>
+                        <li class="mb-2">Go Live & Start Earning</li>
+                    </ol>
+                    <p class="text-muted" style="font-size:0.9rem;"><strong>What You Get:</strong> High-speed chargers,
+                        complete installation support, revenue-sharing, and top tier branding.</p>
+                </div>
+            </div>
+
+            <!-- Government Benefits Section -->
+            <div class="container mt-5 pt-5 pb-5 text-left">
+                <div class="text-center mb-5">
+                    <span class="badge mb-3">Government Benefits</span>
+                    <h2 class="section-title text-center">Government Support & Policies</h2>
+                    <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Full assistance with
+                        government incentives, subsidies, and regulatory approvals.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-file-invoice-dollar"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Up to 70%</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Under FAME II policy for EV charging
+                            infrastructure development.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-map-marked-alt"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Multi-State Policies</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">State-wise Additional Benefits tailored for
+                            rapid deployment.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-percent"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Reduced GST</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Reduced GST rates on EV ecosystem components &
+                            charging equipment.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-shipping-fast"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Fast-Track</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Priority quick setup approvals for highways and
+                            urban areas.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Calculator Section -->
+        <section class="section container">
+            <div class="card mb-5"
+                style="max-width:1000px; margin: 0 auto; padding: 40px; border-top: 4px solid var(--neon-green);">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Interactive Profit Calculator</h2>
+                    <p class="text-muted">Adjust the daily cars to see your potential earnings from a standard 60kW
+                        setup.</p>
+                </div>
+
+                <div class="mb-5">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
+                        <span style="font-weight:600; font-size:1.1rem; color:#fff;">Daily Cars Charging:</span>
+                        <span id="calc-cars-val" style="font-size:1.5rem; font-weight:700; color:var(--neon-green);">5
+                            cars</span>
+                    </div>
+                    <input type="range" id="calc-cars" min="5" max="50" value="5" step="1" class="custom-slider">
+                    <div
+                        style="display:flex; justify-content:space-between; margin-top:5px; color:var(--text-muted); font-size:0.9rem;">
+                        <span>5 cars</span>
+                        <span>50 cars</span>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:40px;"
+                    class="text-center">
+                    <div
+                        style="background:rgba(57, 255, 20, 0.05); border:1px solid rgba(57, 255, 20, 0.3); padding:20px; border-radius:12px;">
+                        <h2 id="calc-daily" style="color:#39ff14;">₹1,800</h2>
+                        <p class="text-muted" style="margin-top:5px;">Daily Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(255, 255, 255, 0.02); border:1px solid rgba(255, 255, 255, 0.1); padding:20px; border-radius:12px;">
+                        <h2 id="calc-monthly" style="color:#fff;">₹54,000</h2>
+                        <p class="text-muted" style="margin-top:5px;">Monthly Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(255, 255, 255, 0.02); border:1px solid rgba(255, 255, 255, 0.1); padding:20px; border-radius:12px;">
+                        <h2 id="calc-yearly" style="color:#fff;">₹6,57,000</h2>
+                        <p class="text-muted" style="margin-top:5px;">Yearly Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(57, 255, 20, 0.1); border:1px solid rgba(57, 255, 20, 0.5); padding:20px; border-radius:12px;">
+                        <h2 id="calc-roi" style="color:#39ff14;">44%</h2>
+                        <p class="text-muted" style="margin-top:5px;">ROI per year</p>
+                    </div>
+                </div>
+
+                <div class="text-center mb-1">
+                    <span id="calc-breakeven" class="badge"
+                        style="font-size:1rem; padding:10px 20px; background:rgba(0,0,0,0.5); border:1px solid var(--neon-green); color:#fff; font-weight:400; letter-spacing:0;"><i
+                            class="fas fa-check-circle" style="color:#39ff14; margin-right:8px;"></i> Break-even in 28
+                        months at current rate</span>
+                </div>
+            </div>
+
+            <p class="text-center" style="font-size:1.3rem; margin-bottom:50px; font-weight:700;">⚡ Build the Future.
+                Power Every Journey.</p>
+
+            <!-- Contact Section -->
+            <div class="card text-center" style="max-width:500px; margin:0 auto; padding:40px; border-top: 4px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.8));">
+                <i class="fas fa-building mb-3" style="font-size:3rem; color:var(--neon-green);"></i>
+                <h3 class="mb-3">Host Enquiry</h3>
+                <p class="text-muted mb-4">Have space available? Contact us to transform your property into an EV charging hub.</p>
+                <p style="font-size:1.1rem; margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--neon-green); margin-right:10px;"></i> info@indrev.in</p>
+                <p style="font-size:1.1rem;"><i class="fas fa-phone" style="color:var(--neon-green); margin-right:10px;"></i> +91 8826803334, +91 7457022485</p>
+            </div>
+        </section>
+    </template>
+
+    <template id="tmpl-franchise">
+        <section class="section container">
+            <div class="text-center mb-5">
+                <span class="badge mb-3">Own a Station</span>
+                <h2 class="section-title text-center">Apply for Franchise</h2>
+                <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Own an EV Charging
+                    Station. Earn Monthly Passive Income. INDR EV offers you the opportunity to own a premium EV
+                    charging franchise and become a part of India’s fastest-growing infrastructure sector.</p>
+            </div>
+
+            <!-- Turnkey Highway Land USP Section -->
+            <div class="card mb-5 text-center"
+                style="max-width:1000px; margin: 50px auto; padding: 40px; border: 2px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.8));">
+                <span class="badge mb-3" style="background:#39ff14; color:#000; font-weight:bold;"><i
+                        class="fas fa-star" style="margin-right:5px;"></i> Exclusive USP</span>
+                <h2 class="section-title" style="color:var(--neon-green); font-size:2.2rem;">Prime Highway Land Provided
+                </h2>
+                <p class="text-muted mb-4" style="font-size:1.1rem; max-width:800px; margin: 0 auto;">
+                    Finding the right location is the biggest hurdle in the EV infrastructure business. That's why INDR
+                    EV goes beyond just providing world-class hardware. <strong>We provide prime, high-traffic highway
+                        land along with our EV charging facilities.</strong> This unique offering makes our franchise a
+                    true 100% turnkey investment.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;"
+                    class="mt-5 text-left">
+                    <div>
+                        <i class="fas fa-map-marked-alt mb-3" style="font-size:2.5rem; color:#39ff14;"></i>
+                        <h4 style="color:#fff; margin-bottom: 8px;">Strategic Locations</h4>
+                        <p class="text-muted" style="font-size:0.9rem;">Pre-vetted, high-footfall highway corridors
+                            guaranteed to deliver maximum EV traffic.</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-handshake mb-3" style="font-size:2.5rem; color:#39ff14;"></i>
+                        <h4 style="color:#fff; margin-bottom: 8px;">100% Turnkey</h4>
+                        <p class="text-muted" style="font-size:0.9rem;">We handle land acquisition, civil work, permits,
+                            and installation. You simply invest and earn.</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-chart-line mb-3" style="font-size:2.5rem; color:#39ff14;"></i>
+                        <h4 style="color:#fff; margin-bottom: 8px;">Accelerated ROI</h4>
+                        <p class="text-muted" style="font-size:0.9rem;">Start generating continuous revenue faster
+                            without wasting months searching for property approvals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Franchise Unit Economics Section -->
+            <div class="text-center mb-5 mt-5">
+                <span class="badge mb-3">Clear Revenue Projections</span>
+                <h2 class="section-title text-center">Franchise Model & Unit Economics</h2>
+                <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Transparent, profitable
+                    business model built to maximize your ROI.</p>
+            </div>
+
+            <!-- Global Economics Specs -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;"
+                class="mb-5 text-center">
+                <div class="card" style="padding:20px;">
+                    <p class="text-muted mb-1">60kW Investment</p>
+                    <h2 style="color:var(--neon-green);">₹15L+</h2>
+                    <p class="text-muted" style="font-size:0.85rem;">Starting package</p>
+                </div>
+                <div class="card" style="padding:20px;">
+                    <p class="text-muted mb-1">120kW Investment</p>
+                    <h2 style="color:var(--neon-green);">₹20L</h2>
+                    <p class="text-muted" style="font-size:0.85rem;">Premium package</p>
+                </div>
+                <div class="card" style="padding:20px;">
+                    <p class="text-muted mb-1">Selling Price</p>
+                    <h2 style="color:#fff;">₹22/kWh</h2>
+                    <p class="text-muted" style="font-size:0.85rem;">Competitive market rate</p>
+                </div>
+                <div class="card" style="padding:20px;">
+                    <p class="text-muted mb-1">Profit Margin</p>
+                    <h2 style="color:var(--neon-green);">₹12-14/kWh</h2>
+                    <p class="text-muted" style="font-size:0.85rem;">After all expenses</p>
+                </div>
+            </div>
+
+            <!-- Specific Package details -->
+            <div class="grid-2 mb-5 text-left" style="align-items:stretch;">
+                <div class="card" style="border-top:4px solid #fff;">
+                    <h3 class="mb-2">60kW Package</h3>
+                    <h2 style="color:var(--neon-green); margin-bottom:15px;">₹15 Lakh+</h2>
+                    <p class="text-muted mb-4">Perfect for small to medium locations.</p>
+                    <ul class="text-muted" style="list-style:none;">
+                        <li class="mb-2"><i class="fas fa-bolt" style="color:#39ff14; margin-right:8px;"></i> 60kW DC
+                            Fast Charger</li>
+                        <li class="mb-2"><i class="fas fa-tools" style="color:#39ff14; margin-right:8px;"></i> Complete
+                            installation included</li>
+                        <li class="mb-2"><i class="fas fa-chart-bar" style="color:#39ff14; margin-right:8px;"></i>
+                            <strong>₹1 Lakh+ monthly potential</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top:4px solid var(--neon-green);">
+                    <h3 class="mb-2">120kW Package</h3>
+                    <h2 style="color:var(--neon-green); margin-bottom:15px;">₹20 Lakh</h2>
+                    <p class="text-muted mb-4">Ideal for high-traffic locations.</p>
+                    <ul class="text-muted" style="list-style:none;">
+                        <li class="mb-2"><i class="fas fa-bolt" style="color:#39ff14; margin-right:8px;"></i> 120kW
+                            Ultra-Fast Charger</li>
+                        <li class="mb-2"><i class="fas fa-tools" style="color:#39ff14; margin-right:8px;"></i> Double
+                            charging capacity</li>
+                        <li class="mb-2"><i class="fas fa-chart-bar" style="color:#39ff14; margin-right:8px;"></i>
+                            <strong>₹2 Lakh+ monthly potential</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Government Benefits Section -->
+            <div class="container mt-5 pt-5 pb-5 text-left">
+                <div class="text-center mb-5">
+                    <span class="badge mb-3">Government Benefits</span>
+                    <h2 class="section-title text-center">Government Support & Policies</h2>
+                    <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Full assistance with
+                        government incentives, subsidies, and regulatory approvals.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-file-invoice-dollar"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Up to 70%</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Under FAME II policy for EV charging
+                            infrastructure development.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-map-marked-alt"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Multi-State Policies</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">State-wise Additional Benefits tailored for
+                            rapid deployment.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-percent"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Reduced GST</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Reduced GST rates on EV ecosystem components &
+                            charging equipment.</p>
+                    </div>
+                    <div class="card text-center" style="padding:20px;">
+                        <i class="fas fa-shipping-fast"
+                            style="font-size:2rem; color:var(--neon-green); margin-bottom:15px;"></i>
+                        <h3 class="mb-2" style="color:#fff; font-size:1.2rem;">Fast-Track</h3>
+                        <p class="text-muted" style="font-size:0.9rem;">Priority quick setup approvals for highways and
+                            urban areas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Calculator Section -->
+            <div class="card mb-5"
+                style="max-width:1000px; margin: 0 auto; padding: 40px; border-top: 4px solid var(--neon-green);">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Interactive Profit Calculator</h2>
+                    <p class="text-muted">Adjust the daily cars to see your potential earnings from a standard 60kW
+                        Franchise setup.</p>
+                </div>
+
+                <div class="mb-5">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:15px;">
+                        <span style="font-weight:600; font-size:1.1rem; color:#fff;">Daily Cars Charging:</span>
+                        <span id="calc-cars-val" style="font-size:1.5rem; font-weight:700; color:var(--neon-green);">5
+                            cars</span>
+                    </div>
+                    <input type="range" id="calc-cars" min="5" max="50" value="5" step="1" class="custom-slider">
+                    <div
+                        style="display:flex; justify-content:space-between; margin-top:5px; color:var(--text-muted); font-size:0.9rem;">
+                        <span>5 cars</span>
+                        <span>50 cars</span>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:40px;"
+                    class="text-center">
+                    <div
+                        style="background:rgba(57, 255, 20, 0.05); border:1px solid rgba(57, 255, 20, 0.3); padding:20px; border-radius:12px;">
+                        <h2 id="calc-daily" style="color:#39ff14;">₹1,800</h2>
+                        <p class="text-muted" style="margin-top:5px;">Daily Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(255, 255, 255, 0.02); border:1px solid rgba(255, 255, 255, 0.1); padding:20px; border-radius:12px;">
+                        <h2 id="calc-monthly" style="color:#fff;">₹54,000</h2>
+                        <p class="text-muted" style="margin-top:5px;">Monthly Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(255, 255, 255, 0.02); border:1px solid rgba(255, 255, 255, 0.1); padding:20px; border-radius:12px;">
+                        <h2 id="calc-yearly" style="color:#fff;">₹6,57,000</h2>
+                        <p class="text-muted" style="margin-top:5px;">Yearly Profit</p>
+                    </div>
+                    <div
+                        style="background:rgba(57, 255, 20, 0.1); border:1px solid rgba(57, 255, 20, 0.5); padding:20px; border-radius:12px;">
+                        <h2 id="calc-roi" style="color:#39ff14;">44%</h2>
+                        <p class="text-muted" style="margin-top:5px;">ROI per year</p>
+                    </div>
+                </div>
+
+                <div class="text-center mb-1">
+                    <span id="calc-breakeven" class="badge"
+                        style="font-size:1rem; padding:10px 20px; background:rgba(0,0,0,0.5); border:1px solid var(--neon-green); color:#fff; font-weight:400; letter-spacing:0;"><i
+                            class="fas fa-check-circle" style="color:#39ff14; margin-right:8px;"></i> Break-even in 28
+                        months at current rate</span>
+                </div>
+            </div>
+
+            <p class="text-center" style="font-size:1.3rem; margin-bottom:50px; font-weight:700;">⚡ Build the Future.
+                Power Every Journey.</p>
+
+            <!-- Contact Section -->
+            <div class="card text-center" style="max-width:500px; margin:0 auto; padding:40px; border-top: 4px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.8));">
+                <i class="fas fa-handshake mb-3" style="font-size:3rem; color:var(--neon-green);"></i>
+                <h3 class="mb-3">Franchise Enquiry</h3>
+                <p class="text-muted mb-4">Ready to invest in the EV revolution? Reach out to our team to discuss franchise opportunities.</p>
+                <p style="font-size:1.1rem; margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--neon-green); margin-right:10px;"></i> info@indrev.in</p>
+                <p style="font-size:1.1rem;"><i class="fas fa-phone" style="color:var(--neon-green); margin-right:10px;"></i> +91 8826803334, +91 7457022485</p>
+            </div>
+        </section>
+    </template>
+
+    <template id="tmpl-faq">
+        <section class="section container">
+            <div class="text-center mb-5">
+                <span class="badge mb-3">Knowledge Base</span>
+                <h1 class="page-title text-center">Frequently Asked Questions</h1>
+                <p class="text-muted" style="max-width:800px; margin:0 auto; font-size:1.1rem;">Everything you need to
+                    know about INDR EV's network, franchising, and technology.</p>
+            </div>
+
+            <div class="grid-2 text-left" style="align-items:flex-start;">
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">What types of EV Chargers do you offer?
+                        </h4>
+                        <p class="text-muted">Our product line includes AC Chargers (7.4 kW, 11 kW, 22 kW) and
+                            high-speed DC Fast Chargers with dynamic load balancing (30 kW, 60 kW, 120 kW, 180 kW, 240
+                            kW) in both single and dual gun configurations.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">Who can host an INDR EV charging
+                            station?</h4>
+                        <p class="text-muted">We partner with commercial property owners, hotel & restaurant operators,
+                            mall spaces, and highway landowners. Basically, if you have a strategic, accessible location
+                            with parking, you can apply to host.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">Are the chargers certified and safe?
+                        </h4>
+                        <p class="text-muted">Yes. Our chargers hold an elite ARAI Certification with a staggering
+                            99.93% accuracy rating. They are IP54 rated for weather protection, built with surge
+                            safeguards, and are fully BIS, CEA, and ISO 9001 compliant.</p>
+                    </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div class="card"
+                        style="border: 1px solid var(--neon-green); background: linear-gradient(145deg, rgba(57,255,20,0.05), rgba(0,0,0,0.6));">
+                        <span class="badge mb-2"
+                            style="background:#39ff14; color:#000; font-size:0.7rem; display:inline-block;">USP</span>
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">Do I need to own land to start a
+                            franchise?</h4>
+                        <p class="text-muted">No! Our biggest USP is that <strong>we provide prime highway land</strong>
+                            along with the EV charging facility. You don't need to own property to start earning; we
+                            offer a 100% turnkey franchise solution in high-traffic corridors to maximize your ROI.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">What is the Franchise Investment cost?
+                        </h4>
+                        <p class="text-muted">Our standard 60kW fast charger package starts at ₹15 Lakh, and our 120kW
+                            package starts at ₹22 Lakh. A standard highly-inclusive setup normally represents a total
+                            capital investment of around ₹18 Lakhs.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">What is the ROI / Revenue model?</h4>
+                        <p class="text-muted">Franchise owners can expect potential passive earnings up to ₹1.5 Lakhs+
+                            per month. We employ a "Smart Royalty" system where a 3% fee only applies AFTER your station
+                            exceeds ₹1 Lakh in monthly earnings.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">What warranties and support are
+                            included?</h4>
+                        <p class="text-muted">We provide an industry-leading 10-Year Lifetime Warranty on our chargers,
+                            which boast the highest ARAI rating (0.9993). We handle all installation, civil work, 24/7
+                            remote monitoring, and help with FAME II Subsidies.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color:var(--neon-green); margin-bottom:10px;">Are there government subsidies
+                            available?</h4>
+                        <p class="text-muted">Absolutely. We assist franchise owners in claiming up to 70% FAME II
+                            Policies for infrastructure development. Additionally, we help secure reduced GST rates and
+                            fast-track multi-state priority approvals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
