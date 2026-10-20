@@ -1,4 +1,4 @@
-const VALID_ROUTES = new Set(["home", "about", "solutions", "host", "franchise", "faq"]);
+const VALID_ROUTES = new Set(["home", "about", "solutions", "host", "franchise", "partners", "faq"]);
 
 const FAQ_ANSWERS = {
     land: "Our biggest USP is that we can provide prime highway land along with the charging setup, so you do not need to own property to start a franchise conversation.",
@@ -61,10 +61,41 @@ const currencyFormatter = new Intl.NumberFormat("en-IN", {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    initDelhiMap();
     initChatbot();
+    initNavigation();
     initPublicApp();
+    initDelhiMap();
 });
+
+function initNavigation() {
+    const toggle = document.querySelector(".menu-toggle");
+    const navigation = document.getElementById("primary-nav");
+    const close = () => {
+        navigation.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation");
+    };
+    toggle.addEventListener("click", () => {
+        const open = toggle.getAttribute("aria-expanded") !== "true";
+        navigation.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    });
+    navigation.addEventListener("click", (event) => {
+        if (event.target.closest("a")) close();
+    });
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+            close();
+            toggle.focus();
+        }
+    });
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest("header")) close();
+    });
+    window.addEventListener("hashchange", close);
+    window.matchMedia("(min-width: 851px)").addEventListener("change", close);
+}
 
 function initPublicApp() {
     const appContent = document.getElementById("app-content");
@@ -78,6 +109,12 @@ function initPublicApp() {
     }
 
     renderRoute();
+
+    document.querySelector(".skip-link").addEventListener("click", (event) => {
+        event.preventDefault();
+        appContent.focus();
+        appContent.scrollIntoView();
+    });
 
     window.addEventListener("hashchange", renderRoute);
 
@@ -102,6 +139,12 @@ function renderRoute() {
     const template = document.getElementById(`tmpl-${route}`) || document.getElementById("tmpl-home");
 
     appContent.innerHTML = template ? template.innerHTML : "";
+    appContent.dataset.route = route;
+    const title = route === "home" ? "Premium Charging Network" : route === "partners" ? "Our Partners" : route.charAt(0).toUpperCase() + route.slice(1);
+    document.title = `INDR EV | ${title}`;
+    appContent.querySelectorAll("img:not([alt])").forEach((image) => {
+        image.alt = "INDR EV charging infrastructure";
+    });
     window.scrollTo(0, 0);
     setActiveNav(route);
     initRouteFeatures(route);
@@ -169,6 +212,8 @@ function initProfitCalculator() {
         return;
     }
 
+    carsSlider.setAttribute("aria-label", "Cars charged per day");
+
     const carsValue = document.getElementById("calc-cars-val");
     const dailyValue = document.getElementById("calc-daily");
     const monthlyValue = document.getElementById("calc-monthly");
@@ -209,10 +254,18 @@ function initChatbot() {
 
     chatbotButton.addEventListener("click", () => {
         chatbotWindow.classList.toggle("hidden");
+        chatbotButton.setAttribute("aria-expanded", String(!chatbotWindow.classList.contains("hidden")));
+        if (!chatbotWindow.classList.contains("hidden")) chatbotClose.focus();
     });
 
     chatbotClose.addEventListener("click", () => {
         chatbotWindow.classList.add("hidden");
+        chatbotButton.setAttribute("aria-expanded", "false");
+        chatbotButton.focus();
+    });
+
+    chatbotWindow.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") chatbotClose.click();
     });
 
     document.querySelectorAll(".chat-faq-btn").forEach((button) => {
@@ -277,7 +330,9 @@ function initDelhiMap() {
         }).addTo(map);
     });
 
-    animateDelhiVehicles(map);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && window.innerWidth > 850) {
+        animateDelhiVehicles(map);
+    }
     window.addEventListener("resize", () => map.invalidateSize());
 }
 
@@ -318,6 +373,11 @@ function animateDelhiVehicles(map) {
     const tick = (now) => {
         const deltaSeconds = Math.min((now - previousFrame) / 1000, 0.05);
         previousFrame = now;
+
+        if (document.hidden) {
+            window.requestAnimationFrame(tick);
+            return;
+        }
 
         vehicles.forEach((vehicle) => {
             vehicle.distance = (vehicle.distance + (vehicle.metric.totalLength * vehicle.speed * deltaSeconds)) % vehicle.metric.totalLength;
@@ -439,9 +499,11 @@ function escapeAttribute(value) {
 function setActiveNav(route) {
     document.querySelectorAll("header .nav-links a, header nav a").forEach((link) => {
         if (link.getAttribute("href") === `#${route}`) {
-            link.style.color = "#39ff14"; // Highlight active link
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
         } else {
-            link.style.color = ""; // Reset to default
+            link.classList.remove("active");
+            link.removeAttribute("aria-current");
         }
     });
 }

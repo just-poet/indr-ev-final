@@ -7,10 +7,36 @@ This is a fully static frontend application for INDR EV.
 Since this project contains only static assets (HTML, CSS, JS, images, etc.), it can be deployed on any static hosting provider.
 
 ### GitHub Pages (Recommended)
-1. Push this project to GitHub.
-2. Go to the repository settings.
-3. Under "Pages", configure the branch and folder (root folder) to be deployed.
-4. Your website will be live. Add a custom domain if necessary.
+Push to `main` to publish through `.github/workflows/pages.yml`. The repository's
+Pages source is GitHub Actions. No build step is required.
+
+Live site: https://just-poet.github.io/indr-ev-final/
+
+## Editing And Preview
+
+Page content lives in the templates in `index.html`; hash routing and calculators
+live in `app.js`. The active responsive stylesheet is `site.css`. The original
+`styles.css` is retained as a reference and is no longer loaded.
+
+The Partners page is available at `#partners`. Update its navigation link,
+template and the homepage logo strip together when adding partners.
+
+## Partner Brand Sources
+
+The partner list was supplied by INDR EV. Descriptions summarise the brands'
+public information without implying charger availability at every outlet.
+
+- IndianOil: https://iocl.com/ and https://iocl.com/corporate-logo
+- IndianOil logo: https://commons.wikimedia.org/wiki/File:Indian_Oil_Logo.svg
+- SUB91: https://sub91.in/
+- Barista: https://www.barista.co.in/
+- The Chocolate Room: https://www.thechocolateroomindia.com/
+- Evara Spa & Resort, Ramnagar: https://evararesort.com/
+
+Logos are stored in `assets/partners/` and retain their original brand colours.
+The IndianOil logo is sourced from Wikimedia Commons; the other logos come from
+the brands' own websites. All brand names and logos belong to their respective
+owners.
 
 ### Vercel / Netlify
 1. Log in to Vercel or Netlify.
