@@ -1,0 +1,32 @@
+{
+  "source": "OpenStreetMap",
+  "license": "ODbL-1.0",
+  "timestamp": "2026-10-16T23:00:00Z",
+  "roads": 12190,
+  "routes": [
+    {
+      "name": "Central Delhi",
+      "nodes": 759,
+      "closed": true,
+      "everySegmentOnRoad": true
+    },
+    {
+      "name": "Old Delhi to ITO",
+      "nodes": 558,
+      "closed": true,
+      "everySegmentOnRoad": true
+    },
+    {
+      "name": "Ring Road",
+      "nodes": 747,
+      "closed": true,
+      "everySegmentOnRoad": true
+    },
+    {
+      "name": "South Delhi",
+      "nodes": 722,
+      "closed": true,
+      "everySegmentOnRoad": true
+    }
+  ]
+}

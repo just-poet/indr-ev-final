@@ -21,6 +21,32 @@ live in `app.js`. The active responsive stylesheet is `site.css`. The original
 The Partners page is available at `#partners`. Update its navigation link,
 template and the homepage logo strip together when adding partners.
 
+Run `node scripts/preview.cjs` to preview at http://localhost:4173.
+
+## Delhi Map Background
+
+The background is a self-hosted vector map generated from OpenStreetMap data.
+Cars follow four connected, closed loops on the actual road geometry. Rendering
+and animation share the same SVG coordinates so resizing cannot move cars off
+their roads. Animation pauses when the tab is hidden or reduced motion is set.
+
+The background needs no API key, paid map plan, external map library or runtime
+map service. Its static files have no service-imposed expiry. The usual website
+hosting and browser support requirements still apply.
+
+To regenerate and validate every animation segment, run:
+
+```sh
+node scripts/build-delhi-map.cjs
+node scripts/test-delhi-map.cjs
+```
+
+`assets/map/delhi-source.json` contains the small ODbL source extract. To refresh
+it, download the NewDelhi `.osm.pbf` from BBBike, install Python's `osmium`
+package, run `python scripts/extract-delhi-map.py path/to/NewDelhi.osm.pbf`, then
+run the Node build command above. Only the generated SVG is loaded by visitors.
+See `assets/map/LICENSE.md` for source attribution and licensing.
+
 ## Partner Brand Sources
 
 The partner list was supplied by INDR EV. Descriptions summarise the brands'
