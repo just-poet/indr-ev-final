@@ -8,11 +8,12 @@
     <meta name="description" content="INDR EV brings smart EV charging to businesses, hospitality destinations and everyday journeys across India. Explore chargers, hosting and franchise opportunities.">
     <meta name="theme-color" content="#080c09">
     <link rel="icon" href="assets/logo.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="site.css?v=20261020-map1">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <link rel="preload" href="assets/vendor/outfit/Outfit-variable.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="site.css?v=20261020-rights1">
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/solid.min.css">
 
 </head>
 
@@ -53,7 +54,8 @@
                 <p>Powering Every Journey Forward.<br>Build a reliable, accessible ecosystem.</p>
                 <p class="mt-4 text-muted" style="font-size:0.8rem;">&copy; 2024 GREENEX INDR EV INDIA PRIVATE LIMITED.<br>
                     GSTIN: 09AAMCG2764L1Z0<br>
-                    All rights reserved.</p>
+                    INDR EV content rights reserved. Third-party materials retain their respective rights and licences.</p>
+                <a href="#legal" class="text-link">Credits &amp; Privacy</a>
             </div>
             <div>
                 <h3>Quick Links</h3>
@@ -457,7 +459,7 @@
                     <img src="assets/wall-charger.jpg"
                         alt="INDR EV Wall Mounted Charger"
                         style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.5s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        >
                 </div>
                 <div>
                     <span class="badge mb-3">Deployment Ready</span>
@@ -974,6 +976,44 @@
         </section>
     </template>
 
+    <template id="tmpl-legal">
+        <section class="section container legal-page">
+            <span class="badge mb-3">Website information</span>
+            <h1 class="page-title text-left">Credits &amp; Privacy</h1>
+            <p class="text-muted mb-5">Sources, licences and contact information for this website. Updated 20 October 2026.</p>
+            <div class="legal-sections">
+                <section class="card">
+                    <h2>Map data</h2>
+                    <p>Map data &copy; OpenStreetMap contributors, licensed under the Open Database License (ODbL) 1.0. The Delhi data extract was obtained through BBBike and rendered in our own visual style.</p>
+                    <p>The moving cars are a decorative illustration, not live traffic, driving directions or a claim of charger availability at the places shown.</p>
+                    <div class="legal-links"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap copyright &amp; licence</a><a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">ODbL 1.0</a><a href="assets/map/delhi-source.json" download>Download the ODbL map database</a><a href="assets/map/LICENSE.md">Map source notice</a></div>
+                </section>
+                <section class="card">
+                    <h2>Typography &amp; icons</h2>
+                    <p>Outfit: Copyright 2021 The Outfit Project Authors. The unmodified font is distributed under the SIL Open Font License 1.1.</p>
+                    <p>Font Awesome Free 6.4.0: Copyright 2023 Fonticons, Inc. The icon font is distributed under SIL OFL 1.1 and its supporting CSS under the MIT licence. The original copyright and licence notices are retained.</p>
+                    <div class="legal-links"><a href="assets/vendor/outfit/OFL.txt">Outfit licence</a><a href="assets/vendor/fontawesome/LICENSE.txt">Font Awesome licences</a><a href="THIRD_PARTY_NOTICES.md">All third-party notices</a></div>
+                </section>
+                <section class="card">
+                    <h2>Images &amp; brand names</h2>
+                    <p>Company imagery and the partner logos are used on the basis of permissions confirmed by INDR EV. Brand names and logos remain the property of their respective owners. Their display does not transfer ownership or grant visitors permission to reuse them.</p>
+                    <p>A partner listing does not mean that every outlet offers charging, or that a brand endorses every statement or service on this website. Contact INDR EV for details about a particular location or arrangement.</p>
+                </section>
+                <section class="card">
+                    <h2>Website privacy</h2>
+                    <p>The fonts, icons, images and map used by this version are served from this website. Its application code does not set cookies, save chat or calculator inputs to browser storage, transmit those inputs to a server, request your location, or include third-party analytics and advertising trackers. The assistant uses predefined answers in your browser.</p>
+                    <p>Hosting infrastructure may process technical request information, such as IP addresses and access logs. This site is hosted on GitHub Pages; see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub's privacy statement</a>.</p>
+                    <p>Following an external link opens another provider's website. Contacting us by email or telephone uses your chosen provider and shares the information you choose to send with INDR EV. Those communications are handled separately from this website. Contact us about how an enquiry is handled, information you have provided or a privacy concern.</p>
+                </section>
+                <section class="card">
+                    <h2>Rights &amp; content enquiries</h2>
+                    <p>If you believe any material on this website infringes your rights, email <a href="mailto:info@indrev.in?subject=Website%20rights%20enquiry">info@indrev.in</a> with the page or asset URL, a description of your concern and information supporting your rights. We can then investigate the material and the relevant permission.</p>
+                    <p>These notices explain sources and website operation. They do not replace the applicable licences, create permission where none exists, or limit rights provided by law.</p>
+                </section>
+            </div>
+        </section>
+    </template>
+
     <template id="tmpl-faq">
         <section class="section container">
             <div class="text-center mb-5">
@@ -1051,7 +1091,7 @@
         </section>
     </template>
 
-    <script src="app.js?v=20261020-map1"></script>
+    <script src="app.js?v=20261020-rights1"></script>
 </body>
 
 </html>

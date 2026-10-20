@@ -1,0 +1,35 @@
+{
+  "description": "Checksums of the bundled vendor files; not a legal certification.",
+  "outfitSource": "https://github.com/google/fonts/tree/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/outfit",
+  "fontAwesomeSource": "https://github.com/FortAwesome/Font-Awesome/tree/6.4.0",
+  "files": [
+    {
+      "path": "assets/vendor/outfit/Outfit-variable.ttf",
+      "sha256": "fc7287273e66929776e2ba54f144fe699080bec29f61bf649d70d871468aeade"
+    },
+    {
+      "path": "assets/vendor/outfit/OFL.txt",
+      "sha256": "c676351bf8576b9aba743cd5eaa8c0e7ee0d51f805d720447b4df4ddb6a2e416"
+    },
+    {
+      "path": "assets/vendor/fontawesome/css/fontawesome.min.css",
+      "sha256": "3dc869c82a722d9fd7c7d881a453ee3d269d461917c7a27901ad357d9dcbbfc4"
+    },
+    {
+      "path": "assets/vendor/fontawesome/css/solid.min.css",
+      "sha256": "b43dcc895ec8fa778047b69062f1920729246b946fba0c34cddd15e558a801e3"
+    },
+    {
+      "path": "assets/vendor/fontawesome/webfonts/fa-solid-900.woff2",
+      "sha256": "b2680383b9f3e1cc1c3036db49f3c18b0ab36091314d4ffdf82a7a11baf03080"
+    },
+    {
+      "path": "assets/vendor/fontawesome/webfonts/fa-solid-900.ttf",
+      "sha256": "6b8212905b6fa79dc7c0d89523b90966b35dafcf07e48949705f646c92bfe046"
+    },
+    {
+      "path": "assets/vendor/fontawesome/LICENSE.txt",
+      "sha256": "0aa8f86525273b2efa4f40f4272a188e187704252170e979dc06879adf68d43c"
+    }
+  ]
+}

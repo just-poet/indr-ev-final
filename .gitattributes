@@ -1,0 +1,4 @@
+assets/vendor/**/*.css text eol=lf
+assets/vendor/**/*.txt text eol=lf
+assets/vendor/**/*.ttf -text
+assets/vendor/**/*.woff2 -text

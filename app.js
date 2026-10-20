@@ -1,4 +1,4 @@
-const VALID_ROUTES = new Set(["home", "about", "solutions", "host", "franchise", "partners", "faq"]);
+const VALID_ROUTES = new Set(["home", "about", "solutions", "host", "franchise", "partners", "faq", "legal"]);
 
 const FAQ_ANSWERS = {
     land: "Our biggest USP is that we can provide prime highway land along with the charging setup, so you do not need to own property to start a franchise conversation.",
@@ -97,7 +97,7 @@ function renderRoute() {
 
     appContent.innerHTML = template ? template.innerHTML : "";
     appContent.dataset.route = route;
-    const title = route === "home" ? "Premium Charging Network" : route === "partners" ? "Our Partners" : route.charAt(0).toUpperCase() + route.slice(1);
+    const title = route === "home" ? "Premium Charging Network" : route === "partners" ? "Our Partners" : route === "legal" ? "Credits & Privacy" : route.charAt(0).toUpperCase() + route.slice(1);
     document.title = `INDR EV | ${title}`;
     appContent.querySelectorAll("img:not([alt])").forEach((image) => {
         image.alt = "INDR EV charging infrastructure";

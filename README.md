@@ -21,6 +21,15 @@ live in `app.js`. The active responsive stylesheet is `site.css`. The original
 The Partners page is available at `#partners`. Update its navigation link,
 template and the homepage logo strip together when adding partners.
 
+The Credits & Privacy page is available at `#legal` from the footer. Font and
+icon files are self-hosted with their original licences in `assets/vendor/`.
+See `THIRD_PARTY_NOTICES.md` for credits and `RIGHTS_REVIEW.md` for the rights
+inventory, owner permission confirmation and unresolved review items. These
+records are not a legal clearance or a guarantee against claims.
+
+Run `node scripts/check-asset-licences.cjs` to check local resource references
+and bundled notices after editing the site.
+
 Run `node scripts/preview.cjs` to preview at http://localhost:4173.
 
 ## Delhi Map Background
@@ -63,6 +72,9 @@ Logos are stored in `assets/partners/` and retain their original brand colours.
 The IndianOil logo is sourced from Wikimedia Commons; the other logos come from
 the brands' own websites. All brand names and logos belong to their respective
 owners.
+The owner confirmed permission for all images and partner logos on 20 October
+2026. Keep the underlying written permission records; a public download URL is
+not treated as a licence or as evidence of that permission.
 
 ### Vercel / Netlify
 1. Log in to Vercel or Netlify.
